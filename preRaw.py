@@ -35,8 +35,18 @@ def createRawCSV(path1,name):
     
 #    frame = frame[features]
 #    frame['Label'] = frame['Label'].map({'null': 2, 'green': 1, 'red': 0})
-    # Dropping quality columns and gyroscope columns
-    frame.drop(frame.columns[[2,4,6,8,10,12,14,16,18,20,22,24,26,28,29,30,31]], axis=1, inplace=True)
+    # Dropping gyroscope columns
+    frame.drop(frame.columns[[29,30,31]], axis=1, inplace=True)
+    print frame.size
+    frame = frame[frame["O1 Quality"] != 0]
+    frame = frame[frame["O2 Quality"] != 0]
+    frame = frame[frame["P7 Quality"] != 0]
+    frame = frame[frame["P8 Quality"] != 0]
+    frame = frame[frame["T7 Quality"] != 0]
+    frame = frame[frame["T8 Quality"] != 0]
+    print frame.size
+    
+    frame.drop(frame.columns[[2,4,6,8,10,12,14,16,18,20,22,24,26,28]], axis=1, inplace=True)
     # Write to the file
     frame.to_csv(name)
 
