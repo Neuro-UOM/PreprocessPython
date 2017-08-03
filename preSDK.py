@@ -33,5 +33,4 @@ def createCSV(path1,name):
     
     frame.to_csv(name)
 
-createCSV('./Data/All','All.csv')
-createCSV('./Data/Sala','Sala.csv')
+createCSV('./Data/VEP/SDK','AllSDK.csv')

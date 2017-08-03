@@ -6,6 +6,7 @@ import os
 import glob
 import numpy as np
 import pandas as pd
+from sklearn import preprocessing
 
 def createRawCSV(path1,name):
     path = path1
@@ -28,7 +29,7 @@ def createRawCSV(path1,name):
     
 #    frame = frame[features]
 #    frame['Label'] = frame['Label'].map({'null': 2, 'green': 1, 'red': 0})
-    
+    frame.drop(frame.columns[[2,4,6,8,10,12,14,16,18,20,22,24,26,28,29,30,31]], axis=1, inplace=True)
     frame.to_csv(name)
 
 
