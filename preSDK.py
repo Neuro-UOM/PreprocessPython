@@ -45,4 +45,4 @@ def find_between_r( s, first, last ):
     except ValueError:
         return ""
         
-createCSV('./data','AllSDK.csv')
+createCSV('data/VEP/SDK','AllSDK.csv')
