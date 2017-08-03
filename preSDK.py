@@ -15,6 +15,8 @@ def createCSV(path1,name):
     list_ = []
     for file_ in allFiles:
         df = pd.read_csv(file_,index_col=None, header=0)
+        value = find_between_r(file_,"_",".csv")
+        df.insert(32,"label",value)
         list_.append(df)
     frame = pd.concat(list_)
     
@@ -25,12 +27,22 @@ def createCSV(path1,name):
         for j in waves:
             features.append(str(i)+ " "+ j)
     
-    features.append("Label")
+    features.append("label")
     print features
     
     frame = frame[features]
-    frame['Label'] = frame['Label'].map({'null': 2, 'green': 1, 'red': 0})
+#    frame['Label'] = frame['Label'].map({'null': 2, 'green': 1, 'red': 0})
     
     frame.to_csv(name)
-
-createCSV('./Data/VEP/SDK','AllSDK.csv')
+    
+    
+# https://stackoverflow.com/questions/3368969/find-string-between-two-substrings
+def find_between_r( s, first, last ):
+    try:
+        start = s.rindex( first ) + len( first )
+        end = s.rindex( last, start )
+        return s[start:end]
+    except ValueError:
+        return ""
+        
+createCSV('./data','AllSDK.csv')
