@@ -21,13 +21,14 @@ def butter_highpass_filter(data, cutoff, fs, order=5):
     y = signal.filtfilt(b, a, data)
     return y
 
-file_ = ('./Data/VEP/10hz/hansika_20' + ".csv")
-#file_ = ('./Data/VEP/RAW/raw_nadun_red' + ".csv")
+#file_ = ('./Data/VEP/10hz/1sec' + ".csv")
+#file_ = ('./Data/VEP/RAW/raw_hansika_red' + ".csv")
+file_ = ('./Data/ssvep/nadun_11' + ".csv")
 
 df = pd.read_csv(file_,index_col=None, header=0)
 
 # specifying the O2 node for the value
-y = df['O2 Value']
+y = df['O1 Value']
 y = butter_highpass_filter(y,5,132,5)
 
 ps = np.abs(np.fft.fft(y))**2
