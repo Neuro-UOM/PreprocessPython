@@ -10,6 +10,9 @@ import seaborn as sns
 import glob
 import pandas as pd
 from scipy import signal
+#from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import Normalizer
 
 # extracted from : https://stackoverflow.com/questions/39032325/python-high-pass-filter
 def butter_highpass(cutoff, fs, order=5):
@@ -30,9 +33,16 @@ def fourier(node):
     y = butter_highpass_filter(y,5,132,5)   
     ps = np.abs(np.fft.fft(y))**2
     ps = ps[range(y.size / 2) ] 
-#    print np.mean(ps)
-#    print ps[0]
-
+    '''
+    # Scale Data    
+    scaler = MinMaxScaler(feature_range=(0, 10000))
+    preprocessedPS = scaler.fit_transform(ps)
+    '''
+    # Standardize Data
+    scaler = StandardScaler().fit(ps)
+    preprocessedPS = scaler.transform(ps)
+    
+    
     time_step = float(1)/128
     '''
     freqs = np.fft.fftfreq( y.size / 2, time_step )
@@ -45,7 +55,7 @@ def fourier(node):
     freqs = freqs[range(n/2)] # one side frequency range
     idx = np.argsort(freqs)
     
-    return freqs,ps,idx
+    return freqs,preprocessedPS,idx
 
 
 
