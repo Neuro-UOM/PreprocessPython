@@ -29,12 +29,20 @@ def fourier(node):
     y = df[node]
     y = butter_highpass_filter(y,5,132,5)   
     ps = np.abs(np.fft.fft(y))**2
-    
+    ps = ps[range(y.size / 2) ] 
 #    print np.mean(ps)
 #    print ps[0]
 
     time_step = float(1)/128
-    freqs = np.fft.fftfreq( y.size , time_step )
+    '''
+    freqs = np.fft.fftfreq( y.size / 2, time_step )
+    idx = np.argsort(freqs)
+    '''
+    n = len(y) # length of the signal
+    k = np.arange(n)
+    T = n*time_step
+    freqs = k/T # two sides frequency range
+    freqs = freqs[range(n/2)] # one side frequency range
     idx = np.argsort(freqs)
     
     return freqs,ps,idx
