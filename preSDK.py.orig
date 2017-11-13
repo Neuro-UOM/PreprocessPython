@@ -45,4 +45,8 @@ def find_between_r( s, first, last ):
     except ValueError:
         return ""
         
+<<<<<<< Updated upstream
+createCSV('data/VEP/SDK','AllSDK.csv')
+=======
 createCSV('./data','all_sdk.csv')
+>>>>>>> Stashed changes

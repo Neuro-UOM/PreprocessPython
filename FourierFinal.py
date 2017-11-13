@@ -23,7 +23,7 @@ def butter_highpass_filter(data, cutoff, fs, order=5):
 
 #file_ = ('./Data/VEP/10hz/1sec' + ".csv")
 #file_ = ('./Data/VEP/RAW/raw_hansika_red' + ".csv")
-file_ = ('./Data/ssvep/nadun_11' + ".csv")
+file_ = ('../Data/ssvep/nadun_11' + ".csv")
 
 df = pd.read_csv(file_,index_col=None, header=0)
 
@@ -40,6 +40,6 @@ freqs = np.fft.fftfreq( y.size , time_step )
 idx = np.argsort(freqs)
 
 plt.plot(freqs[idx] , ps[idx])
-
+plt.title("nadun 11 Hz")
 plt.show()
 

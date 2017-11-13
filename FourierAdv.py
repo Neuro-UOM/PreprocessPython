@@ -50,13 +50,15 @@ def fourier(node):
 
 
 #file_ = ('./Data/VEP/10hz/pamoda_20' + ".csv")
-#file_ = ('./Data/VEP/RAW/raw_hansika_red' + ".csv")
-file_ = ('./Data/ssvep/dinuka_8' + ".csv")
+file_ = ('./vep_ml/raw_hansika_red' + ".csv")
+#file_ = ('./ssvep/dinuka_8' + ".csv")
 
 df = pd.read_csv(file_,index_col=None, header=0,skiprows=range(1, 35))
 
 rows,clmns = df.shape 
 
+df2=df
+df3=df[1:5]
 df = df.loc[128 :5*128]
 
 # specifying the O2 node for the value
